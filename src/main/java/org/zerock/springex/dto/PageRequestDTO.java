@@ -31,16 +31,16 @@ public class PageRequestDTO {
     private int size = 10;
 
     private String link;
-
-    private String[] types;
-
-    private String keyword;
-
-    private boolean finished;
-
-    private LocalDate from;
-
-    private LocalDate to;
+//
+//    private String[] types;
+//
+//    private String keyword;
+//
+//    private boolean finished;
+//
+//    private LocalDate from;
+//
+//    private LocalDate to;
 
 
     public int getSkip(){
@@ -48,61 +48,61 @@ public class PageRequestDTO {
         return (page -1) * 10;
     }
 
-//    public String getLink() {
-//        if(link == null){
-//            StringBuilder builder = new StringBuilder();
-//
-//            builder.append("page=" + this.page);
-//
-//            builder.append("&size=" + this.size);
-//            link = builder.toString();
-//        }
-//        return link;
-//    }
-
     public String getLink() {
-        StringBuilder builder = new StringBuilder();
+        if(link == null){
+            StringBuilder builder = new StringBuilder();
 
-        builder.append("page=" + this.page);
+            builder.append("page=" + this.page);
 
-        builder.append("&size=" + this.size);
-
-        if(finished){
-            builder.append("&finished=on");
+            builder.append("&size=" + this.size);
+            link = builder.toString();
         }
-
-        if(types != null && types.length > 0){
-            for (int i = 0; i < types.length ; i++) {
-                builder.append("&types=" + types[i]);
-            }
-        }
-
-        if(keyword != null){
-            try {
-                builder.append("&keyword=" + URLEncoder.encode(keyword,"UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(from != null){
-            builder.append("&from=" + from.toString());
-        }
-
-        if(to != null){
-            builder.append("&to=" + to.toString());
-        }
-
-        return builder.toString();
+        return link;
     }
 
-
-    public boolean checkType(String type){
-
-        if(types == null || types.length == 0){
-            return false;
-        }
-        return Arrays.stream(types).anyMatch(type::equals);
-    }
+//    public String getLink() {
+//        StringBuilder builder = new StringBuilder();
+//
+//        builder.append("page=" + this.page);
+//
+//        builder.append("&size=" + this.size);
+//
+//        if(finished){
+//            builder.append("&finished=on");
+//        }
+//
+//        if(types != null && types.length > 0){
+//            for (int i = 0; i < types.length ; i++) {
+//                builder.append("&types=" + types[i]);
+//            }
+//        }
+//
+//        if(keyword != null){
+//            try {
+//                builder.append("&keyword=" + URLEncoder.encode(keyword,"UTF-8"));
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        if(from != null){
+//            builder.append("&from=" + from.toString());
+//        }
+//
+//        if(to != null){
+//            builder.append("&to=" + to.toString());
+//        }
+//
+//        return builder.toString();
+//    }
+//
+//
+//    public boolean checkType(String type){
+//
+//        if(types == null || types.length == 0){
+//            return false;
+//        }
+//        return Arrays.stream(types).anyMatch(type::equals);
+//    }
 
 }
